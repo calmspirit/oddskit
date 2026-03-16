@@ -7,11 +7,35 @@ export default function Home() {
   const [forecast, setForecast] = useState('')
   const [result, setResult] = useState<any>(null)
   const [history, setHistory] = useState<any[]>([])
+  const [weather, setWeather] = useState<any>(null)
+  const [loading, setLoading] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const saved = localStorage.getItem('calcHistory')
     if (saved) setHistory(JSON.parse(saved))
   }, [])
+
+  const fetchWeather = async (city: string = 'Beijing') => {
+    setLoading(true)
+    try {
+      const coords: any = { Beijing: [39.9, 116.4], Shanghai: [31.2, 121.5], Shenzhen: [22.5, 114.1] }
+      const [lat, lon] = coords[city] || coords.Beijing
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,precipitation,weather_code&daily=precipitation_probability_max&timezone=Asia/Shanghai`)
+      const data = await res.json()
+      setWeather({
+        temp: data.current.temperature_2m,
+        precip: data.current.precipitation,
+        prob: data.daily.precipitation_probability_max[0],
+        city
+      })
+      setForecast(data.daily.precipitation_probability_max[0].toString())
+    } catch (e) {
+      console.error(e)
+    }
+    setLoading(false)
+  }
 
   const calculate = () => {
     const yes = parseFloat(yesPrice) / 100
@@ -35,21 +59,68 @@ export default function Home() {
 
     setResult(newResult)
     
-    const newHistory = [{ yesPrice, noPrice, forecast, ...newResult }, ...history].slice(0, 5)
+    const newHistory = [{ yesPrice, noPrice, forecast, ...newResult }, ...history].slice(0, 10)
     setHistory(newHistory)
     localStorage.setItem('calcHistory', JSON.stringify(newHistory))
   }
 
+  const exportCSV = () => {
+    const csv = ['时间,YES价格,NO价格,预报概率,优势,期望值,ROI,建议', 
+      ...history.map(h => `${h.time},${h.yesPrice},${h.noPrice},${h.forecast},${h.edge},${h.ev},${h.roi},${h.recommend}`)
+    ].join('\n')
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `weather-arbitrage-${Date.now()}.csv`
+    link.click()
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6">
-      <div className="max-w-3xl mx-auto pt-6 sm:pt-12">
+      <div className={`max-w-3xl mx-auto pt-6 sm:pt-12 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl mb-4 shadow-lg shadow-blue-500/50">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl mb-4 shadow-lg shadow-blue-500/50 animate-pulse">
             <span className="text-3xl">⛅</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">天气套利计算器</h1>
           <p className="text-blue-200 text-sm sm:text-base">Weather Arbitrage Calculator</p>
+        </div>
+
+        {/* Weather Widget */}
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-white flex items-center">
+              <span className="mr-2">🌤️</span> 实时天气数据
+            </h2>
+            <select onChange={(e) => fetchWeather(e.target.value)} className="px-3 py-1 bg-white/20 text-white rounded-lg text-sm border border-white/30 focus:ring-2 focus:ring-cyan-400">
+              <option value="Beijing">北京</option>
+              <option value="Shanghai">上海</option>
+              <option value="Shenzhen">深圳</option>
+            </select>
+          </div>
+          {!weather && !loading && (
+            <button onClick={() => fetchWeather()} className="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-medium hover:from-cyan-600 hover:to-blue-600 transition">
+              获取天气预报
+            </button>
+          )}
+          {loading && <div className="text-center text-blue-200 py-3">加载中...</div>}
+          {weather && (
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="bg-white/10 rounded-lg p-3">
+                <div className="text-xs text-blue-200 mb-1">温度</div>
+                <div className="text-xl font-bold text-white">{weather.temp}°C</div>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <div className="text-xs text-blue-200 mb-1">降水</div>
+                <div className="text-xl font-bold text-white">{weather.precip}mm</div>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <div className="text-xs text-blue-200 mb-1">降雨概率</div>
+                <div className="text-xl font-bold text-white">{weather.prob}%</div>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Calculator Card */}
@@ -96,23 +167,23 @@ export default function Home() {
 
             <button
               onClick={calculate}
-              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-cyan-600 transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 active:scale-98"
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:scale-105 active:scale-95"
             >
               🎯 计算套利机会
             </button>
 
             {result && (
-              <div className="mt-6 p-5 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur rounded-xl border border-white/30 space-y-4">
+              <div className="mt-6 p-5 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur rounded-xl border border-white/30 space-y-4 animate-fadeIn">
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="bg-white/10 rounded-lg p-3">
+                  <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-all duration-300">
                     <div className="text-xs text-blue-200 mb-1">优势</div>
                     <div className="text-xl font-bold text-white">{result.edge}%</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-3">
+                  <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-all duration-300">
                     <div className="text-xs text-blue-200 mb-1">期望值</div>
                     <div className="text-xl font-bold text-white">{result.ev}%</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-3">
+                  <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-all duration-300">
                     <div className="text-xs text-blue-200 mb-1">ROI</div>
                     <div className="text-xl font-bold text-white">{result.roi}%</div>
                   </div>
@@ -120,9 +191,9 @@ export default function Home() {
                 <div className="pt-4 border-t border-white/20">
                   <div className="text-center">
                     <div className="text-sm text-blue-200 mb-2">建议操作</div>
-                    <div className={`inline-block px-6 py-2 rounded-full font-bold text-xl ${
-                      result.recommend === 'YES' ? 'bg-green-500 text-white shadow-lg shadow-green-500/50' : 
-                      result.recommend === 'NO' ? 'bg-red-500 text-white shadow-lg shadow-red-500/50' : 
+                    <div className={`inline-block px-6 py-2 rounded-full font-bold text-xl transition-all duration-300 ${
+                      result.recommend === 'YES' ? 'bg-green-500 text-white shadow-lg shadow-green-500/50 animate-pulse' : 
+                      result.recommend === 'NO' ? 'bg-red-500 text-white shadow-lg shadow-red-500/50 animate-pulse' : 
                       'bg-gray-500 text-white'
                     }`}>
                       {result.recommend}
@@ -137,9 +208,14 @@ export default function Home() {
         {/* History */}
         {history.length > 0 && (
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-8">
-            <h2 className="flex items-center text-xl font-bold mb-5 text-white">
-              <span className="mr-2">📊</span> 计算历史
-            </h2>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="flex items-center text-xl font-bold text-white">
+                <span className="mr-2">📊</span> 计算历史
+              </h2>
+              <button onClick={exportCSV} className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg">
+                📥 导出CSV
+              </button>
+            </div>
             <div className="space-y-3">
               {history.map((item, i) => (
                 <div key={i} className="p-4 bg-white/10 backdrop-blur rounded-xl border border-white/20 hover:bg-white/15 transition">
@@ -164,6 +240,28 @@ export default function Home() {
                 </div>
               ))}
             </div>
+
+            {/* Simple ROI Chart */}
+            {history.length > 2 && (
+              <div className="mt-6 p-4 bg-white/5 rounded-xl">
+                <h3 className="text-sm font-bold text-white mb-3">ROI 趋势</h3>
+                <div className="flex items-end justify-between h-32 gap-2">
+                  {history.slice(0, 10).reverse().map((item, i) => {
+                    const height = Math.min(Math.abs(parseFloat(item.roi)), 100)
+                    const isPositive = parseFloat(item.roi) > 0
+                    return (
+                      <div key={i} className="flex-1 flex flex-col items-center">
+                        <div className={`w-full rounded-t transition-all duration-500 ${isPositive ? 'bg-green-400' : 'bg-red-400'}`} 
+                             style={{ height: `${height}%` }}
+                             title={`ROI: ${item.roi}%`}>
+                        </div>
+                        <div className="text-xs text-blue-200 mt-1">{i+1}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
