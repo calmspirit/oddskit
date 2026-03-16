@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { TrendingUp, TrendingDown, Cloud, Droplets, ThermometerSun, Calculator, Download, Github, Sparkles, BarChart3, Clock, Target, Globe, Sun, Moon } from 'lucide-react'
 import { translations, cities } from './i18n'
+import Link from 'next/link'
 
 type Lang = 'en' | 'ja' | 'fr' | 'es' | 'zh-CN' | 'zh-TW'
 
@@ -151,6 +152,10 @@ export default function Home() {
             <button onClick={toggleTheme} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               {theme === 'light' ? <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" /> : <Sun className="w-5 h-5 text-yellow-500" />}
             </button>
+            <Link href="/odds-converter" className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 flex items-center gap-2 transition-colors">
+              <Calculator className="w-4 h-4" />
+              Odds Converter
+            </Link>
             <select value={lang} onChange={(e) => changeLang(e.target.value as Lang)} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 dark:text-gray-100 shadow-sm">
               <option value="en">English</option>
               <option value="ja">日本語</option>
