@@ -199,7 +199,7 @@ export default function EVCalculator() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link href="/" className="p-4 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               <h4 className="font-semibold mb-2 dark:text-gray-100">Weather Arbitrage Calculator</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Find arbitrage opportunities in weather markets</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Find arbitrage opportunities in weather prediction markets</p>
             </Link>
             <a href="https://accounts.binance.com/register?ref=11131007" target="_blank" className="p-4 border border-yellow-200 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors">
               <h4 className="font-semibold mb-2 dark:text-gray-100">Trade on Binance</h4>

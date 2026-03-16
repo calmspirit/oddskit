@@ -1,37 +1,36 @@
-# ⛅ Weather Arbitrage Calculator
+# 🎲 OddsKit
 
-A real-time calculator for identifying arbitrage opportunities in weather prediction markets by comparing market prices with meteorological forecasts.
+Your Complete Odds Toolkit - Professional odds conversion and betting calculators for prediction markets and sports betting.
 
-![Weather Arbitrage Calculator](https://img.shields.io/badge/Next.js-15-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)
+![OddsKit](https://img.shields.io/badge/Next.js-15-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)
 
 ## 🎯 Features
 
-- **Real-time Arbitrage Calculation** - Instantly calculate edge, expected value (EV), and ROI
-- **Smart Recommendations** - Get YES/NO/HOLD signals based on probability differences
-- **Calculation History** - Track your last 5 calculations with local storage
+- **Odds Converter** - Convert between American, Decimal, Fractional odds and Implied Probability
+- **Kelly Criterion Calculator** - Calculate optimal bet sizing for bankroll management
+- **Weather Arbitrage Calculator** - Real-time arbitrage opportunities in weather prediction markets
+- **Smart Recommendations** - Get YES/NO/HOLD signals based on probability analysis
+- **Calculation History** - Track your calculations with local storage
+- **Multi-language Support** - Available in EN, JA, FR, ES, ZH-CN, ZH-TW
 - **Responsive Design** - Works seamlessly on desktop and mobile devices
-- **Clean UI** - Modern gradient interface with Tailwind CSS
+- **Dark Mode** - Easy on the eyes for extended use
+- **CSV Export** - Export your calculation history
 
 ## 🚀 How to Use
 
-1. **Enter Market YES Price** - The current market probability for the event (e.g., 65%)
-2. **Enter Market NO Price** - The inverse market probability (e.g., 35%)
-3. **Enter Weather Forecast** - The meteorological forecast probability (e.g., 75%)
+### Odds Converter
+Convert between different odds formats instantly. Enter any format and see all conversions.
+
+### Kelly Criterion
+1. Enter your bankroll
+2. Enter odds and your estimated probability
+3. Get optimal bet size recommendation
+
+### Weather Arbitrage
+1. **Enter Market YES Price** - Current market probability (e.g., 65%)
+2. **Enter Market NO Price** - Inverse market probability (e.g., 35%)
+3. **Enter Weather Forecast** - Meteorological forecast probability (e.g., 75%)
 4. **Click Calculate** - Get instant arbitrage analysis
-
-### Example Scenario
-
-```
-Market YES: 65%
-Market NO: 35%
-Forecast: 75%
-
-Result:
-- Edge: +10%
-- Expected Value: +7.5%
-- ROI: +11.54%
-- Recommendation: YES (Buy)
-```
 
 ## 🛠️ Tech Stack
 
@@ -52,8 +51,8 @@ Result:
 
 ```bash
 # Clone the repository
-git clone https://github.com/calmspirit/weather-arbitrage-calculator.git
-cd weather-arbitrage-calculator
+git clone https://github.com/calmspirit/weather-arbitrage-calculators.git
+cd weather-arbitrage-calculators
 
 # Install dependencies
 npm install
@@ -75,7 +74,7 @@ npm start
 
 ### Deploy to Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/calmspirit/weather-arbitrage-calculator)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/calmspirit/weather-arbitrage-calculators)
 
 1. Push your code to GitHub
 2. Import project in Vercel
@@ -91,11 +90,9 @@ npm run build
 npm start
 ```
 
-The app will be available at `http://localhost:3000`
-
 ## 📊 How It Works
 
-The calculator uses the following formulas:
+### Weather Arbitrage Formulas
 
 - **Edge** = Weather Forecast Probability - Market Implied Probability
 - **Expected Value (EV)** = (Forecast × (1 - YES Price)) - ((1 - Forecast) × YES Price)
@@ -105,6 +102,13 @@ The calculator uses the following formulas:
 - Edge > 10%: **BUY YES**
 - Edge < -10%: **BUY NO**
 - -10% ≤ Edge ≤ 10%: **NO ARBITRAGE**
+
+### Kelly Criterion Formula
+
+- **Kelly %** = (bp - q) / b
+  - b = decimal odds - 1
+  - p = probability of winning
+  - q = probability of losing (1 - p)
 
 ## 🤝 Contributing
 
@@ -122,10 +126,11 @@ This project is open source and available under the MIT License.
 
 ## 🔗 Links
 
-- **Live Demo**: [Coming Soon]
-- **GitHub**: https://github.com/calmspirit/weather-arbitrage-calculator
-- **Issues**: https://github.com/calmspirit/weather-arbitrage-calculator/issues
+- **GitHub**: https://github.com/calmspirit/weather-arbitrage-calculators
+- **Issues**: https://github.com/calmspirit/weather-arbitrage-calculators/issues
+
+**Note**: Repository will be renamed to `oddskit` soon. URLs will be updated accordingly.
 
 ---
 
-Built with ❤️ for prediction market traders
+Built with ❤️ for prediction market traders and sports bettors

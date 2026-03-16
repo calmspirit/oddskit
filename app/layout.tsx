@@ -2,12 +2,12 @@ import './globals.css'
 import Script from 'next/script'
 
 export const metadata = {
-  title: 'Weather Arbitrage Calculator | Polymarket Weather Arbitrage Tool',
-  description: 'Professional Polymarket weather market arbitrage calculator. Real-time Edge, EV and ROI calculations to help you discover arbitrage opportunities in weather prediction markets',
-  keywords: 'Polymarket, weather arbitrage, prediction market, arbitrage calculator, weather trading, betting odds',
+  title: 'OddsKit | Your Complete Odds Toolkit',
+  description: 'Professional odds conversion and betting calculators. Real-time Edge, EV, ROI calculations, Kelly Criterion, and odds conversion tools for prediction markets and sports betting',
+  keywords: 'odds converter, Kelly calculator, arbitrage calculator, betting odds, prediction market, EV calculator, ROI calculator, sports betting tools',
   openGraph: {
-    title: 'Weather Arbitrage Calculator',
-    description: 'Discover arbitrage opportunities in Polymarket weather markets',
+    title: 'OddsKit - Your Complete Odds Toolkit',
+    description: 'Professional odds conversion and betting calculators for prediction markets',
     type: 'website',
   },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',

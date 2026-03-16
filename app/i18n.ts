@@ -56,8 +56,8 @@ export const translations = {
     github: 'GitHubで見る'
   },
   fr: {
-    title: 'Calculateur d\'Arbitrage Météo',
-    subtitle: 'Outil d\'analyse d\'arbitrage de marché prédictif basé sur les données météorologiques',
+    title: 'OddsKit',
+    subtitle: 'Votre boîte à outils complète - Calculateurs professionnels pour marchés prédictifs',
     realtime: 'Temps réel',
     accurate: 'Précis',
     tracking: 'Suivi',
@@ -84,8 +84,8 @@ export const translations = {
     github: 'Voir sur GitHub'
   },
   es: {
-    title: 'Calculadora de Arbitraje Meteorológico',
-    subtitle: 'Herramienta de análisis de arbitraje de mercado predictivo basada en datos meteorológicos',
+    title: 'OddsKit',
+    subtitle: 'Su kit completo de herramientas - Calculadoras profesionales para mercados predictivos',
     realtime: 'Tiempo real',
     accurate: 'Preciso',
     tracking: 'Seguimiento',
@@ -112,8 +112,8 @@ export const translations = {
     github: 'Ver en GitHub'
   },
   'zh-CN': {
-    title: '天气套利计算器',
-    subtitle: '基于气象数据的预测市场套利分析工具',
+    title: 'OddsKit',
+    subtitle: '您的完整赔率工具包 - 预测市场专业计算器',
     realtime: '实时数据',
     accurate: '精准计算',
     tracking: '历史追踪',
@@ -202,3 +202,4 @@ export const cities = [
   { name: 'Melbourne', label: { en: 'Melbourne', ja: 'メルボルン', fr: 'Melbourne', es: 'Melbourne', 'zh-CN': '墨尔本', 'zh-TW': '墨爾本' }, coords: [-37.8136, 144.9631] },
   { name: 'Auckland', label: { en: 'Auckland', ja: 'オークランド', fr: 'Auckland', es: 'Auckland', 'zh-CN': '奥克兰', 'zh-TW': '奧克蘭' }, coords: [-36.8485, 174.7633] }
 ]
+
