@@ -33,6 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     if (mounted && typeof window !== 'undefined') {
+      let attempts = 0
       const initAds = () => {
         if (typeof (window as any)._aads !== 'undefined') {
           try {
@@ -40,8 +41,14 @@ export default function Home() {
           } catch (e) {
             console.error('A-Ads init failed:', e)
           }
-        } else {
+        } else if (attempts < 30) {
+          attempts++
           setTimeout(initAds, 100)
+        } else {
+          const container = document.getElementById('a-ads-container')
+          if (container) {
+            container.innerHTML = '<div style="padding: 16px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; color: white;"><div style="font-size: 14px; margin-bottom: 8px;">🛡️ Ad Blocker Detected</div><div style="font-size: 12px; opacity: 0.9;">Please disable ad blocker to support this free tool</div></div>'
+          }
         }
       }
       initAds()
