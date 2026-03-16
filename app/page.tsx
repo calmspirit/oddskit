@@ -31,6 +31,14 @@ export default function Home() {
     if (savedCity) setSelectedCity(savedCity)
   }, [])
 
+  useEffect(() => {
+    if (mounted && typeof window !== 'undefined') {
+      const script = document.createElement('script')
+      script.innerHTML = `_aads && _aads.init({container: 'a-ads-container'})`
+      document.body.appendChild(script)
+    }
+  }, [mounted])
+
   const changeLang = (newLang: Lang) => {
     setLang(newLang)
     localStorage.setItem('lang', newLang)
@@ -267,6 +275,12 @@ export default function Home() {
                 </div>
               </div>
             )}
+            <div className="mt-6 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-gray-200 shadow-sm">
+              <div className="text-xs text-gray-500 mb-2 text-center">Advertisement</div>
+              <div className="flex justify-center">
+                <div id="a-ads-container" className="max-w-full"></div>
+              </div>
+            </div>
           </div>
         </div>
 
