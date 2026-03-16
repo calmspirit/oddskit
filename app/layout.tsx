@@ -2,12 +2,12 @@ import './globals.css'
 import Script from 'next/script'
 
 export const metadata = {
-  title: '天气套利计算器 | Polymarket Weather Arbitrage Calculator',
-  description: '专业的 Polymarket 天气市场套利计算工具，实时计算 Edge、EV 和 ROI，帮助你发现天气预测市场的套利机会',
-  keywords: 'Polymarket, 天气套利, 预测市场, 套利计算器, weather arbitrage, prediction market',
+  title: 'Weather Arbitrage Calculator | Polymarket Weather Arbitrage Tool',
+  description: 'Professional Polymarket weather market arbitrage calculator. Real-time Edge, EV and ROI calculations to help you discover arbitrage opportunities in weather prediction markets',
+  keywords: 'Polymarket, weather arbitrage, prediction market, arbitrage calculator, weather trading, betting odds',
   openGraph: {
-    title: '天气套利计算器',
-    description: '发现 Polymarket 天气市场的套利机会',
+    title: 'Weather Arbitrage Calculator',
+    description: 'Discover arbitrage opportunities in Polymarket weather markets',
     type: 'website',
   },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh">
+    <html lang="en">
       <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛅</text></svg>" />
       </head>
