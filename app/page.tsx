@@ -31,29 +31,7 @@ export default function Home() {
     if (savedCity) setSelectedCity(savedCity)
   }, [])
 
-  useEffect(() => {
-    if (mounted && typeof window !== 'undefined') {
-      let attempts = 0
-      const initAds = () => {
-        if (typeof (window as any)._aads !== 'undefined') {
-          try {
-            (window as any)._aads.init({container: 'a-ads-container'})
-          } catch (e) {
-            console.error('A-Ads init failed:', e)
-          }
-        } else if (attempts < 30) {
-          attempts++
-          setTimeout(initAds, 100)
-        } else {
-          const container = document.getElementById('a-ads-container')
-          if (container) {
-            container.innerHTML = '<div style="padding: 16px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; color: white;"><div style="font-size: 14px; margin-bottom: 8px;">🛡️ Ad Blocker Detected</div><div style="font-size: 12px; opacity: 0.9;">Please disable ad blocker to support this free tool</div></div>'
-          }
-        }
-      }
-      initAds()
-    }
-  }, [mounted])
+
 
   const changeLang = (newLang: Lang) => {
     setLang(newLang)
@@ -294,7 +272,9 @@ export default function Home() {
             <div className="mt-6 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-gray-200 shadow-sm">
               <div className="text-xs text-gray-500 mb-2 text-center">Advertisement</div>
               <div className="flex justify-center">
-                <div id="a-ads-container" className="max-w-full"></div>
+                <div id="frame" style={{width: '100%', margin: 'auto', position: 'relative', zIndex: 99998}}>
+                  <iframe data-aa='2430615' src='//acceptable.a-ads.com/2430615/?size=Adaptive' style={{border: 0, padding: 0, width: '70%', height: 'auto', overflow: 'hidden', display: 'block', margin: 'auto'}} />
+                </div>
               </div>
             </div>
           </div>
