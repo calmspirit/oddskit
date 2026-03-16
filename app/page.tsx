@@ -140,46 +140,76 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       <div className="max-w-6xl mx-auto p-6">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-full mb-3 shadow-lg">
-              <Sparkles className="w-4 h-4" />
-              4 Free Tools Available
+        <div className="mb-12 text-center">
+          <div className="flex gap-2 mb-4 justify-center flex-wrap">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg">
+              ✓ 100% Free
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
-              <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-              {t.title}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">{t.subtitle}</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500 text-white text-xs font-bold rounded-full shadow-lg">
+              ✓ No Registration Required
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full shadow-lg">
+              <Target className="w-3 h-3" />
+              47,000+ Monthly Searches
+            </div>
           </div>
-          <div className="flex gap-3">
-            <button onClick={toggleTheme} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              {theme === 'light' ? <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" /> : <Sun className="w-5 h-5 text-yellow-500" />}
-            </button>
-            <Link href="/odds-converter" className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 flex items-center gap-2 transition-colors">
-              <Calculator className="w-4 h-4" />
-              Odds Converter
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-4">
+            {t.title}
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">{t.subtitle}</p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link href="#calculator" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:shadow-xl transition-all transform hover:scale-105">
+              Start Calculating Free →
             </Link>
-            <Link href="/kelly-calculator" className="px-4 py-2 bg-purple-600 dark:bg-purple-500 text-white rounded-lg hover:bg-purple-700 dark:hover:bg-purple-600 flex items-center gap-2 transition-colors">
-              <Calculator className="w-4 h-4" />
-              Kelly Calculator
+            <Link href="/odds-converter" className="px-8 py-4 bg-white dark:bg-gray-800 border-2 border-blue-600 text-blue-600 dark:text-blue-400 text-lg font-semibold rounded-xl hover:shadow-xl transition-all">
+              View All Tools
             </Link>
-            <select value={lang} onChange={(e) => changeLang(e.target.value as Lang)} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 dark:text-gray-100 shadow-sm">
-              <option value="en">English</option>
-              <option value="ja">日本語</option>
-              <option value="fr">Français</option>
-              <option value="es">Español</option>
-              <option value="zh-CN">简体中文</option>
-              <option value="zh-TW">繁體中文</option>
-            </select>
-            <a href="https://github.com/calmspirit/weather-arbitrage-calculators" target="_blank" className="px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 flex items-center gap-2 transition-colors">
-              <Github className="w-4 h-4" />
-              {t.github}
-            </a>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">🎉 Join 1,000+ traders finding profitable opportunities</p>
+        </div>
+
+        <div className="flex justify-end items-center mb-8 gap-3">
+          <button onClick={toggleTheme} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            {theme === 'light' ? <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" /> : <Sun className="w-5 h-5 text-yellow-500" />}
+          </button>
+          <select value={lang} onChange={(e) => changeLang(e.target.value as Lang)} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 dark:text-gray-100 shadow-sm">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <Link href="/odds-converter" className="relative group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-transparent hover:border-blue-500">
+            <div className="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-full">⭐ MOST POPULAR</div>
+            <Calculator className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-3" />
+            <h3 className="font-bold text-lg text-gray-800 dark:text-gray-100 mb-2">Odds Converter</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Convert between American, Decimal, Fractional odds instantly. Save time and avoid calculation errors.</p>
+          </Link>
+          
+          <Link href="/kelly-calculator" className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-transparent hover:border-purple-500">
+            <BarChart3 className="w-10 h-10 text-purple-600 dark:text-purple-400 mb-3" />
+            <h3 className="font-bold text-lg text-gray-800 dark:text-gray-100 mb-2">Kelly Calculator</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Optimize your bet sizing with Kelly Criterion. Maximize long-term growth while managing risk.</p>
+          </Link>
+          
+          <Link href="/arbitrage-calculator" className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-transparent hover:border-green-500">
+            <TrendingUp className="w-10 h-10 text-green-600 dark:text-green-400 mb-3" />
+            <h3 className="font-bold text-lg text-gray-800 dark:text-gray-100 mb-2">Arbitrage Finder</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Discover guaranteed profit opportunities across multiple bookmakers. Risk-free betting strategies.</p>
+          </Link>
+          
+          <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-transparent hover:border-orange-500">
+            <Cloud className="w-10 h-10 text-orange-600 dark:text-orange-400 mb-3" />
+            <h3 className="font-bold text-lg text-gray-800 dark:text-gray-100 mb-2">Weather Arbitrage</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Find edges in weather prediction markets using real-time meteorological data.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div id="calculator" className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-blue-100 dark:border-blue-900 transition-colors">
             <div className="flex items-center gap-3 mb-2">
               <Clock className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -363,6 +393,37 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="font-bold text-lg mb-3 text-gray-800 dark:text-gray-100">About OddsKit</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Free betting calculators and tools for smart traders. No registration, no fees, no BS.</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-3 text-gray-800 dark:text-gray-100">Quick Links</h3>
+              <div className="flex flex-col gap-2">
+                <Link href="/odds-converter" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">Odds Converter</Link>
+                <Link href="/kelly-calculator" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">Kelly Calculator</Link>
+                <Link href="/arbitrage-calculator" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">Arbitrage Finder</Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-3 text-gray-800 dark:text-gray-100">Connect</h3>
+              <div className="flex gap-3">
+                <a href="https://github.com/calmspirit/weather-arbitrage-calculators" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                  <Github className="w-6 h-6" />
+                </a>
+                <a href="https://twitter.com/oddskit" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="text-center text-sm text-gray-500 dark:text-gray-400 pb-6">
+            © 2026 OddsKit. Built for traders, by traders. 🎯
+          </div>
+        </footer>
       </div>
     </div>
   )
