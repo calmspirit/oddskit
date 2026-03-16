@@ -1,14 +1,14 @@
 export default function Sidebar() {
   return (
-    <aside className="w-full lg:w-[30%] space-y-4">
-      <div className="sticky top-20 space-y-4">
+    <aside className="space-y-4">
+      <div className="lg:sticky lg:top-20 space-y-4">
         <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div className="text-xs text-gray-500 dark:text-gray-400 mb-2 text-center">Advertisement</div>
           <div className="flex justify-center">
             <iframe 
               data-aa='2430615' 
               src='//acceptable.a-ads.com/2430615/?size=Adaptive' 
-              style={{border: 0, padding: 0, width: '100%', height: 'auto', overflow: 'hidden', display: 'block'}} 
+              style={{border: 0, padding: 0, width: '100%', height: '250px', overflow: 'hidden', display: 'block'}} 
             />
           </div>
         </div>

@@ -20,10 +20,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="flex-1 lg:w-[70%]">
+          <div className="w-full lg:flex-1">
             {children}
           </div>
-          <Sidebar />
+          <div className="w-full lg:w-80 lg:flex-shrink-0">
+            <Sidebar />
+          </div>
         </div>
       </main>
 
