@@ -156,6 +156,10 @@ export default function Home() {
               <Calculator className="w-4 h-4" />
               Odds Converter
             </Link>
+            <Link href="/kelly-calculator" className="px-4 py-2 bg-purple-600 dark:bg-purple-500 text-white rounded-lg hover:bg-purple-700 dark:hover:bg-purple-600 flex items-center gap-2 transition-colors">
+              <Calculator className="w-4 h-4" />
+              Kelly Calculator
+            </Link>
             <select value={lang} onChange={(e) => changeLang(e.target.value as Lang)} className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 dark:text-gray-100 shadow-sm">
               <option value="en">English</option>
               <option value="ja">日本語</option>
